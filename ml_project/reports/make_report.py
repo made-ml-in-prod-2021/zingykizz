@@ -3,7 +3,7 @@ from pandas_profiling import ProfileReport
 
 
 def main():
-    data = pd.read_csv("../data/heart.csv")
+    data = pd.read_csv("../data/raw/heart.csv")
 
     profile = ProfileReport(data)
     profile.to_file("report.html")
