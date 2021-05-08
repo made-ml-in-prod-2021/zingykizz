@@ -6,4 +6,4 @@ from typing import List
 class FeatureParams:
     categorical_features: List[str]
     numerical_features: List[str]
-    target_col: str = "target"
+    target_col: str
