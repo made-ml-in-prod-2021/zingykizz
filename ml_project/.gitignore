@@ -1,3 +1,6 @@
+# pkl files
+*.pkl
+
 # Pycharm cache files
 .idea/
 
