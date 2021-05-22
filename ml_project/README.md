@@ -1,4 +1,8 @@
-Запуск пайплайна обучения:
+Запуск пайплайна обучения с чтением параметров из конфига:
 ~~~
-python train_pipeline.py
+python train_pipeline.py --сfg_path "configs/train_config_lr.yaml"
+~~~
+Получение предсказаний из артефактов:
+~~~
+python predict_pipeline.py --cfg_path "configs/predict_config.yaml"
 ~~~
