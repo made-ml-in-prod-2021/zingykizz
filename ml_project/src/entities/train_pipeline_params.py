@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-from entities.split_params import SplittingParams
-from entities.feature_params import FeatureParams
-from entities.train_params import TrainingParams
+from src.entities.split_params import SplittingParams
+from src.entities.feature_params import FeatureParams
+from src.entities.train_params import TrainingParams
 from marshmallow_dataclass import class_schema
 import yaml
 
@@ -10,6 +10,7 @@ import yaml
 class TrainingPipelineParams:
     input_data_path: str
     output_model_path: str
+    output_transformer_path: str
     metric_path: str
     splitting_params: SplittingParams
     feature_params: FeatureParams

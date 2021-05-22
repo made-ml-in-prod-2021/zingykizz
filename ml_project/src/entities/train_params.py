@@ -1,8 +1,8 @@
 from dataclasses import dataclass
+from typing import Dict, Any
 
 
 @dataclass
 class TrainingParams:
     model_type: str
-    penalty: str
-    C: float
+    model_params: Dict[str, Any]
