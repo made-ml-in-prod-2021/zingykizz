@@ -4,10 +4,9 @@ import sys
 import pandas as pd
 from app import CONFIG_PATH
 
-sys.path.append("..")
 from src.entities.online_inference_app_params import read_online_inference_app_params
 
-DATA_PATH = "../data/raw/sample_for_pred.csv"
+DATA_PATH = "data/raw/sample_for_pred.csv"
 
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler(sys.stdout)

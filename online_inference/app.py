@@ -3,9 +3,7 @@ import pandas as pd
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, validator
-import sys
 
-sys.path.append("..")
 from src.entities.online_inference_app_params import read_online_inference_app_params
 from src.features.build_features import process_features
 from src.models.fit_predict import (
