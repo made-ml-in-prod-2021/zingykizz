@@ -19,3 +19,6 @@ docker push zingykizz/online_inference:v1
 ~~~
 docker pull zingykizz/online_inference:v1
 ~~~
+
+Для оптимизация размера docker image был использован python:3.9-slim вместо python:3.9
+Размер образа понизился с 2.011GB до 1.238GB
