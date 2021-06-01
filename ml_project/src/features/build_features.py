@@ -31,6 +31,7 @@ def build_transformer(params: FeatureParams) -> ColumnTransformer:
             ),
         ]
     )
+    transformer._features = params.categorical_features + params.numerical_features
     return transformer
 
 
@@ -40,7 +41,7 @@ def serialize_transformer(transformer: ColumnTransformer, fout: str) -> None:
 
 
 def process_features(transformer: ColumnTransformer, df: pd.DataFrame) -> pd.DataFrame:
-    return pd.DataFrame(transformer.transform(df))
+    return pd.DataFrame(transformer.transform(df[transformer._features]))
 
 
 def extract_features(df: pd.DataFrame, params: FeatureParams) -> pd.DataFrame:

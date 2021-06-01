@@ -38,7 +38,7 @@ def predict_pipeline(predicting_pipeline_params: PredictingPipelineParams) -> No
     transformer = load_transformer(predicting_pipeline_params.transformer_path)
 
     logger.info("Применение трансформера...")
-    features = process_features(transformer, features[transformer._feature_names_in])
+    features = process_features(transformer, features)
 
     logger.info("Загрузка модели...")
     model = load_model(predicting_pipeline_params.model_path)
