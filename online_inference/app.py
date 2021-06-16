@@ -1,3 +1,6 @@
+import contextlib
+import time
+import threading
 from typing import List, Union
 import pandas as pd
 import uvicorn
@@ -13,6 +16,8 @@ from src.models.fit_predict import (
 )
 
 CONFIG_PATH = "configs/online_inference_app_config.yaml"
+APP_START_DELAY = 20
+APP_LIFE_DURATION = 120
 
 online_inference_app_params = read_online_inference_app_params(CONFIG_PATH)
 model = load_model(online_inference_app_params.model_path)
@@ -68,12 +73,30 @@ async def app_predict(request: Classifier):
     return predict(request.data, request.features)
 
 
+class Server(uvicorn.Server):
+    def install_signal_handlers(self):
+        pass
+
+    @contextlib.contextmanager
+    def run_in_thread(self):
+        thread = threading.Thread(target=self.run)
+        thread.start()
+        try:
+            while not self.started:
+                time.sleep(1e-3)
+            yield
+        finally:
+            self.should_exit = True
+            thread.join()
+
+
 def app_run():
-    uvicorn.run(
-        app,
-        host=online_inference_app_params.host,
-        port=online_inference_app_params.port,
-    )
+    config = uvicorn.Config(app, host=online_inference_app_params.host, port=online_inference_app_params.port)
+    server = Server(config=config)
+
+    time.sleep(APP_START_DELAY)
+    with server.run_in_thread():
+        time.sleep(APP_LIFE_DURATION)
 
 
 if __name__ == "__main__":
