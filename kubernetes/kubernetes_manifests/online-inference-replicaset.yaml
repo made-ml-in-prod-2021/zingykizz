@@ -11,7 +11,6 @@ spec:
       app: online-inference
   template:
     metadata:
-      name: online-inference
       labels:
         app: online-inference
     spec:
