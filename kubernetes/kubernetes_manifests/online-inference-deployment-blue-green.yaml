@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: online-inference
+  labels:
+    app: online-inference
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: online-inference
+  template:
+    metadata:
+      labels:
+        app: online-inference
+    spec:
+      containers:
+        - name: online-inference
+          image: zingykizz/online_inference:v2
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 100
+            periodSeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0
